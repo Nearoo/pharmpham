@@ -25,7 +25,7 @@ const ProductList = ({}) => {
 }
 
 
-export const  ProfileView = ({imagePath="/profile.png"}) => {
+export const ProfileView = ({ imagePath ="https://i.imgur.com/JiOArmf.png"}) => {
     const appState = useContext(AppStateContext);
     const userData = appState.userData ?? {};
     console.log(userData);
