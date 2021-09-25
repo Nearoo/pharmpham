@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/pharmpham/static/css/main.1e1b01e3.chunk.css",
-    "main.js": "/pharmpham/static/js/main.d3ebab4a.chunk.js",
-    "main.js.map": "/pharmpham/static/js/main.d3ebab4a.chunk.js.map",
+    "main.js": "/pharmpham/static/js/main.645fb76f.chunk.js",
+    "main.js.map": "/pharmpham/static/js/main.645fb76f.chunk.js.map",
     "runtime-main.js": "/pharmpham/static/js/runtime-main.a7af2a75.js",
     "runtime-main.js.map": "/pharmpham/static/js/runtime-main.a7af2a75.js.map",
     "static/css/2.a95be28f.chunk.css": "/pharmpham/static/css/2.a95be28f.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.a95be28f.chunk.css",
     "static/js/2.b03d90ed.chunk.js",
     "static/css/main.1e1b01e3.chunk.css",
-    "static/js/main.d3ebab4a.chunk.js"
+    "static/js/main.645fb76f.chunk.js"
   ]
 }

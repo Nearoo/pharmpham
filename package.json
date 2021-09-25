@@ -2,7 +2,7 @@
   "name": "pamphlet-hoster",
   "version": "0.1.0",
   "private": true,
-    "homepage": "https://nearoo.github.io/pharmpham",
+    "homepage": "https://nearoo.github.io/pharmpham/",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@testing-library/jest-dom": "^5.11.4",

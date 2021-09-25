@@ -55,7 +55,7 @@ export class AppStateProvider extends Component {
         this.db = getDatabase();
         this.stor = getStorage();
 
-        fetch("/md_example.md").then(r => r.text()).then(text => this.setState({ defaultMarkdown: text }));
+        fetch("https://raw.githubusercontent.com/Nearoo/pharmpham/master/public/md_example.md").then(r => r.text()).then(text => this.setState({ defaultMarkdown: text }));
     }
 
 
