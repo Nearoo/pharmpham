@@ -8,7 +8,10 @@ export class AppStateProvider extends Component {
         // Add default fields & functions to change state
         this.state = {
             setX: this.setX,
-            x: 2
+            x: 2,
+            setView: this.setView,
+            loadManuel: this.loadManuel,
+            loadProduct: this.loadProduct 
         }
     }
 
@@ -16,9 +19,27 @@ export class AppStateProvider extends Component {
         this.x = 2;
     }
 
-    setX = () => {
-        this.setState({x: 3})
+
+    setView = (view) => {
+        this.setState({view})
     }
+
+    loadManuel = (id) => {
+        const path = '/md_example.md'
+        fetch(path).then(r => r.text()).then(text => this.setState({manual: text}));
+    }
+
+    loadProduct = (inst_id) => {
+        this.setState({expiry:'5/6/2027'})
+        console.log(this.state)
+    }
+
+    setX = () => {
+        this.setState({x: 3});
+        // fetch(path).then(r => r.text()).then(text => setContent(text));z
+    }
+
+    loadProp
 
 
     render = () => {
