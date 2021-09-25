@@ -7,9 +7,7 @@ import { ProductInstanceView } from "./views/productInst";
 import { ProfileView } from "./views/profile";
 
 const Header = () => {
-    return <>
-        <Typography.Title level={1}>Pharmpham</Typography.Title>
-    </>
+    return <Divider>Pharmapham</Divider>
 }
 
 
@@ -22,7 +20,7 @@ const Content = () => {
             title={appState.title}
             />,
         "profile": <ProfileView />
-    }[appState.view ?? "profile"]
+    }[appState.view ?? "profile"];
 }
 
 const Footer = () => {
@@ -33,8 +31,6 @@ export const Main = () => {
     
     return <div style={{display: "flex", flexDirection: "column", height: "100%"}}>
         <MainMenu />
-        <div style={{padding: "10px"}}><Header /></div>
-        <Divider />
         <div style={{ flexGrow: 1, padding: "15px", overflowY: "scroll", overflowX: "hidden" }}><Content /></div>
         <div style={{ padding: "10px", boxShadow: "0px 0px 3px grey"}}><Footer /></div>
     </div>

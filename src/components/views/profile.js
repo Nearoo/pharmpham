@@ -1,4 +1,4 @@
-import { Avatar, Divider, Image, List, Space, Typography } from "antd"
+import { Avatar, Divider, Image, List, Row, Space, Typography, Col } from "antd"
 import { UserOutlined } from '@ant-design/icons';
 import { useContext } from "react";
 import { AppStateContext } from "../state";
@@ -6,17 +6,18 @@ import { AppStateContext } from "../state";
 
 const { Text } = Typography;
 
-const ProductList = ({products}) => {
+const ProductList = ({}) => {
     const appState = useContext(AppStateContext);
+    console.log(appState.pinned);
     return <List
-        dataSource={products}
+        dataSource={appState.pinned}
         bordered
         renderItem={item => {
             return <List.Item>
                 <List.Item.Meta title={item.title} description={item.description} onClick={() => {
                     appState.setView("product");
-                    appState.loadManual(item.productId);
-                    appState.loadProduct(item.productId);
+                    appState.loadProduct(item.class);
+                    window.history.pushState({}, "Product", `/?productId=${item.class}`)
                     }} />
                 <Text italic>Up to Date</Text>
             </List.Item>
@@ -25,21 +26,24 @@ const ProductList = ({products}) => {
 
 
 export const  ProfileView = ({imagePath="/profile.png"}) => {
-    const dataSource = [{
-        title: "Betadine",
-        productId: "20003892839"
-    }];
+    const appState = useContext(AppStateContext);
     return <>
         <Space direction="vertical" style={{width: "100%"}}>
-        <Avatar size={128} icon={<UserOutlined />} src={imagePath ? <Image src={imagePath} /> : null}/><br />
-        <Divider plain={false} dashed/>
-
-            <Text>Max Mustermann</Text>
-            <Text>17.08.1992</Text>
+            <Row>
+                <Col>
+                    <Avatar size={64} icon={<UserOutlined />} src={imagePath ? <Image src={imagePath} /> : null} /><br />
+                </Col>
+                <Col style={{paddingLeft: "20px"}}>
+                <Space direction="vertical">
+                    <Text>{appState.firstname} {appState.lastname}</Text>
+                    <Text>{appState.birthday}</Text>
+                </Space>
+                </Col>
+            </Row>
         
-        <Divider />
-        <Typography.Title level={4} italic>Pinned</Typography.Title>
-        <ProductList products={dataSource} />
+        <Divider orientation="left">Pinned</Divider>
+        <ProductList />
+        <Divider orientation="left">Recents</Divider>
         </Space>
         
     </>

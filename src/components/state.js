@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-
 // Import the functions you need from the SDKs you need
 // import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
+import { get, getDatabase, onValue, ref } from 'firebase/database';
+import { getDownloadURL, getStorage, ref as storageRef } from 'firebase/storage';
+import React, { Component } from 'react';
+import _ from 'lodash';
 
-import {initializeApp} from 'firebase/app'
-import {getDatabase, ref, onValue} from 'firebase/database'
 
 // import credJson from '../credentials/pharmpham-ca9c2-firebase-adminsdk-rbpxq-ba90ed6013.json'
 
@@ -29,16 +30,28 @@ export class AppStateProvider extends Component {
         // Add default fields & functions to change state
         initializeApp(firebaseConfig);
         this.state = {
-            setX: this.setX,
-            x: 2,
             setView: this.setView,
             loadManual: this.loadManual,
-            loadProduct: this.loadProduct 
+            loadProduct: this.loadProduct,
+            loadUserData: this.loadUserData, 
+            productIsPinned: this.productIsPinned,
+            setProductIsPinned: this.setProductIsPinned
         }
     }
 
-    componentDidUpdate = () => {
-        this.x = 2;
+    loadUserData = (userId="00192") => {
+        get(ref(this.db, `/users/${userId}`)).then(data => {
+            const jsData = data.val();
+            this.setState(jsData);
+        })
+        this.setState({
+        
+        })
+    }
+
+    componentDidMount = () => {
+        this.db = getDatabase();
+        this.stor = getStorage();
     }
 
 
@@ -47,15 +60,13 @@ export class AppStateProvider extends Component {
     }
 
     loadManual = (classId) => {
-        const db = getDatabase()
-        const classData = ref(db,`/class/${classId}`)
-        onValue(classData,(data) => {
+        const classData = ref(this.db,`/class/${classId}`)
+        get(classData).then((data) => {
             const dataVal = data.val();
-            // console.log(dataVal.manual)
             this.setState({manual:dataVal.manual});
+            const manualRef = storageRef(this.stor, dataVal.manualUri);
+            getDownloadURL(manualRef).then(url => fetch(url).then(r => r.text()).then(text => this.setState({manual: text})));
         });
-        const path = '/md_example.md'
-        fetch(path).then(r => r.text()).then(text => this.setState({manual: text}));
     }
 
     loadProduct = (prodId) => {
@@ -63,19 +74,15 @@ export class AppStateProvider extends Component {
         const prodData = ref(db,`/instance/${prodId}`);
         onValue(prodData,(data) => {
             const dataVal = data.val();
+            if(dataVal == null){
+                console.error("Datavali is null. Prodid:", prodId);
+            }
             this.setState({expiryDate:dataVal.expiry_date});
             this.loadManual(dataVal.class_id)
         });
         this.setState({expiry:'5/6/2027'})
         console.log(this.state)
     }
-
-    setX = () => {
-        this.setState({x: 3});
-        // fetch(path).then(r => r.text()).then(text => setContent(text));z
-    }
-
-    loadProp
 
 
     render = () => {

@@ -1,4 +1,4 @@
-import { useState, useContext, useCallback } from 'react';
+import { useState, useContext, useCallback, useEffect } from 'react';
 import { Button, Menu } from 'antd';
 import { AppStateContext } from './state';
 
@@ -10,9 +10,6 @@ export const MainMenu = () => {
         {
             viewTarget: "profile",
             title: "Profile"
-        }, {
-            viewTarget: "product",
-            title: "Product"
         }
     ]
 
@@ -21,7 +18,29 @@ export const MainMenu = () => {
         appState.setView(view);
         setSelectedKey(String(key));
         setCollapsed(true);
+
+        if(view === "profile"){
+            appState.loadUserData();
+        }
     })
+
+    const loadViewfromUrl = useCallback(() => {
+        const url = new URL(window.location.href);
+        const id = url.searchParams.get("productId");
+        if (id) {
+            appState.loadProduct(id);
+            appState.setView("product");
+        } else {
+            appState.loadUserData();
+            appState.setView("profile");
+        }
+    })
+    // Load file from URL if available, else load profile
+    useEffect(() => {
+        loadViewfromUrl();
+        window.addEventListener('popstate', () => loadViewfromUrl());
+    }, [])
+
     return <>
     <Button onClick={() => setCollapsed(!collapsed)}>Menu</Button>
         {collapsed ? <></> :
