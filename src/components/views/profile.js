@@ -1,6 +1,6 @@
 import { Avatar, Divider, Image, List, Row, Space, Typography, Col } from "antd"
 import { UserOutlined } from '@ant-design/icons';
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppStateContext } from "../state";
 
 
@@ -8,16 +8,15 @@ const { Text } = Typography;
 
 const ProductList = ({}) => {
     const appState = useContext(AppStateContext);
-    console.log(appState.pinned);
     return <List
-        dataSource={appState.pinned}
+        dataSource={appState?.userData?.pinned}
         bordered
         renderItem={item => {
             return <List.Item>
                 <List.Item.Meta title={item.title} description={item.description} onClick={() => {
                     appState.setView("product");
-                    appState.loadProduct(item.class);
-                    window.history.pushState({}, "Product", `/?productId=${item.class}`)
+                    appState.loadProductInstance(item.instance);
+                    window.history.pushState({}, "Product", `/?productId=${item.instance}`)
                     }} />
                 <Text italic>Up to Date</Text>
             </List.Item>
@@ -27,6 +26,8 @@ const ProductList = ({}) => {
 
 export const  ProfileView = ({imagePath="/profile.png"}) => {
     const appState = useContext(AppStateContext);
+    const userData = appState.userData ?? {};
+    console.log(userData);
     return <>
         <Space direction="vertical" style={{width: "100%"}}>
             <Row>
@@ -35,8 +36,8 @@ export const  ProfileView = ({imagePath="/profile.png"}) => {
                 </Col>
                 <Col style={{paddingLeft: "20px"}}>
                 <Space direction="vertical">
-                    <Text>{appState.firstname} {appState.lastname}</Text>
-                    <Text>{appState.birthday}</Text>
+                    <Text>{userData.firstname} {userData.lastname}</Text>
+                    <Text>{userData.birthday}</Text>
                 </Space>
                 </Col>
             </Row>

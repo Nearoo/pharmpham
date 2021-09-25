@@ -26,12 +26,18 @@ export const MainMenu = () => {
 
     const loadViewfromUrl = useCallback(() => {
         const url = new URL(window.location.href);
-        const id = url.searchParams.get("productId");
-        if (id) {
-            appState.loadProduct(id);
+        const productId = url.searchParams.get("productId");
+        const productClassId = url.searchParams.get("classId");
+        
+        appState.loadUserData();
+        
+        if (productId) {
+            appState.loadProductInstance(productId);
+            appState.setView("product");
+        } else if (productClassId) {
+            appState.loadProductClass(productClassId);
             appState.setView("product");
         } else {
-            appState.loadUserData();
             appState.setView("profile");
         }
     })

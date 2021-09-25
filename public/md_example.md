@@ -1,5 +1,4 @@
 
-## Package leaflet: Information for the user
 
 * Bond pill instant hero serum
 * Povidone Iodine

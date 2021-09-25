@@ -31,8 +31,8 @@ export class AppStateProvider extends Component {
         initializeApp(firebaseConfig);
         this.state = {
             setView: this.setView,
-            loadManual: this.loadManual,
-            loadProduct: this.loadProduct,
+            loadProductClass: this.loadProductClass,
+            loadProductInstance: this.loadProductInstance,
             loadUserData: this.loadUserData, 
             productIsPinned: this.productIsPinned,
             setProductIsPinned: this.setProductIsPinned
@@ -42,7 +42,8 @@ export class AppStateProvider extends Component {
     loadUserData = (userId="00192") => {
         get(ref(this.db, `/users/${userId}`)).then(data => {
             const jsData = data.val();
-            this.setState(jsData);
+            this.setState({userData: jsData});
+            console.info("Loaded user ", userId);
         })
         this.setState({
         
@@ -52,6 +53,8 @@ export class AppStateProvider extends Component {
     componentDidMount = () => {
         this.db = getDatabase();
         this.stor = getStorage();
+
+        fetch("/md_example.md").then(r => r.text()).then(text => this.setState({ defaultMarkdown: text }));
     }
 
 
@@ -59,26 +62,32 @@ export class AppStateProvider extends Component {
         this.setState({view})
     }
 
-    loadManual = (classId) => {
+    loadProductClass = (classId) => {
         const classData = ref(this.db,`/class/${classId}`)
         get(classData).then((data) => {
             const dataVal = data.val();
-            this.setState({manual:dataVal.manual});
-            const manualRef = storageRef(this.stor, dataVal.manualUri);
-            getDownloadURL(manualRef).then(url => fetch(url).then(r => r.text()).then(text => this.setState({manual: text})));
+            if(dataVal){
+                this.setState({ productClass: dataVal });
+                console.info("Loaded class with id", classId);
+            } else {
+                console.error("Tried loading inexistant product clas with id ", classId);
+            }
+            
         });
     }
 
-    loadProduct = (prodId) => {
+    loadProductInstance = (prodId) => {
         const db = getDatabase()
         const prodData = ref(db,`/instance/${prodId}`);
-        onValue(prodData,(data) => {
+        get(prodData).then(data => {
             const dataVal = data.val();
-            if(dataVal == null){
-                console.error("Datavali is null. Prodid:", prodId);
+            if(dataVal){
+                this.setState({product: dataVal});
+                this.loadProductClass(dataVal.class_id);
+                console.info("Loaded product with id", prodId);
+            } else {
+                console.error("Tried loading inexistant product with id", prodId);
             }
-            this.setState({expiryDate:dataVal.expiry_date});
-            this.loadManual(dataVal.class_id)
         });
         this.setState({expiry:'5/6/2027'})
         console.log(this.state)
