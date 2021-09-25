@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/pharmpham/static/css/main.1e1b01e3.chunk.css",
+    "main.js": "/pharmpham/static/js/main.8bd1a205.chunk.js",
+    "main.js.map": "/pharmpham/static/js/main.8bd1a205.chunk.js.map",
+    "runtime-main.js": "/pharmpham/static/js/runtime-main.a7af2a75.js",
+    "runtime-main.js.map": "/pharmpham/static/js/runtime-main.a7af2a75.js.map",
+    "static/css/2.a95be28f.chunk.css": "/pharmpham/static/css/2.a95be28f.chunk.css",
+    "static/js/2.e7e96963.chunk.js": "/pharmpham/static/js/2.e7e96963.chunk.js",
+    "static/js/2.e7e96963.chunk.js.map": "/pharmpham/static/js/2.e7e96963.chunk.js.map",
+    "index.html": "/pharmpham/index.html",
+    "static/css/2.a95be28f.chunk.css.map": "/pharmpham/static/css/2.a95be28f.chunk.css.map",
+    "static/css/main.1e1b01e3.chunk.css.map": "/pharmpham/static/css/main.1e1b01e3.chunk.css.map",
+    "static/js/2.e7e96963.chunk.js.LICENSE.txt": "/pharmpham/static/js/2.e7e96963.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a7af2a75.js",
+    "static/css/2.a95be28f.chunk.css",
+    "static/js/2.e7e96963.chunk.js",
+    "static/css/main.1e1b01e3.chunk.css",
+    "static/js/main.8bd1a205.chunk.js"
+  ]
+}
