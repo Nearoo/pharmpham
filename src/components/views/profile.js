@@ -2,6 +2,7 @@ import { Avatar, Divider, Image, List, Row, Space, Typography, Col } from "antd"
 import { UserOutlined } from '@ant-design/icons';
 import { useContext, useEffect } from "react";
 import { AppStateContext } from "../state";
+import { SimpleList } from "./productClass";
 
 
 const { Text } = Typography;
@@ -18,7 +19,7 @@ const ProductList = ({}) => {
                     appState.loadProductInstance(item.instance);
                     window.history.pushState({}, "Product", `/?productId=${item.instance}`)
                     }} />
-                <Text italic>Up to Date</Text>
+                <Text type="warning" >{item?.update_state}</Text>
             </List.Item>
         }} />
 }
@@ -42,9 +43,10 @@ export const  ProfileView = ({imagePath="/profile.png"}) => {
                 </Col>
             </Row>
         
-        <Divider orientation="left">Pinned</Divider>
+        <Divider orientation="left"></Divider>
+
         <ProductList />
-        <Divider orientation="left">Recents</Divider>
+        
         </Space>
         
     </>

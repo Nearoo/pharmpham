@@ -32,6 +32,7 @@ export class AppStateProvider extends Component {
         this.state = {
             setView: this.setView,
             loadProductClass: this.loadProductClass,
+            getProductClassOnce: this.getProductClassOnce,
             loadProductInstance: this.loadProductInstance,
             loadUserData: this.loadUserData, 
             productIsPinned: this.productIsPinned,
@@ -74,6 +75,11 @@ export class AppStateProvider extends Component {
             }
             
         });
+    }
+
+    getProductClassOnce = classId => {
+        const classData = ref(this.db, `/class/${classId}`)
+        return get(classData);
     }
 
     loadProductInstance = (prodId) => {

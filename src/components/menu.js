@@ -1,6 +1,7 @@
 import { useState, useContext, useCallback, useEffect } from 'react';
-import { Button, Menu } from 'antd';
+import { Button, Menu, Space, Typography, PageHeader } from 'antd';
 import { AppStateContext } from './state';
+const {Text} = Typography;
 
 export const MainMenu = () => {
     const [collapsed, setCollapsed] = useState(true);
@@ -48,14 +49,6 @@ export const MainMenu = () => {
     }, [])
 
     return <>
-    <Button onClick={() => setCollapsed(!collapsed)}>Menu</Button>
-        {collapsed ? <></> :
-            <Menu
-                defaultSelectedKeys={[selectedKey]}
-                mode="inline"
-            >
-            {items.map((item, i) => <Menu.Item key={i} onClick={() => setView(i)}>{item.title}</Menu.Item>)}
-            </Menu>
-        }
+        <PageHeader ghost={false} extra={<Button onClick={() => setView(0)} >Profile</Button>} title="Drugbuddy" />
     </>
 }

@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown"
 import { AppStateContext } from "../state"
 
 
-const SimpleList = ({ elements = [], ordered }) => {
+export const SimpleList = ({ elements = [], ordered }) => {
     const els = elements.map(e => <li>{e}</li>);
     return ordered ? <ol>{els}</ol> : <ul>{els}</ul>
 }
@@ -53,8 +53,8 @@ export const ProductClassView = ({data, user}) => {
         </TitledSection>
 
         <TitledSection title="Further Infos" render={precaus} >
-            <Collapse>
-                <Collapse.Panel header="Leaflet"><ReactMarkdown>{String(appState.defaultMarkdown) ?? "_loading..._"}</ReactMarkdown></Collapse.Panel>
+            <Collapse defaultActiveKey={['1']}>
+                <Collapse.Panel header="Leaflet" key='1'><ReactMarkdown>{String(appState.defaultMarkdown) ?? "_loading..._"}</ReactMarkdown></Collapse.Panel>
             </Collapse>
         </TitledSection>
         

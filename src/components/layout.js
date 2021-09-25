@@ -24,7 +24,6 @@ const Content = () => {
 export const Main = () => {
     
     return <div style={{display: "flex", flexDirection: "column", height: "100%"}}>
-        <Text style={{paddingLeft: "10px"}}>Drugbud</Text>
         <MainMenu />
         <div style={{ flexGrow: 1, padding: "15px", overflowY: "scroll", overflowX: "hidden" }}><Content /></div>
     </div>
