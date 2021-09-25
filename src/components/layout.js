@@ -1,9 +1,10 @@
 
 import { Divider, Typography } from "antd";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { MainMenu } from "./menu";
 import { AppStateContext } from "./state";
 import { ProductInstanceView } from "./views/productInst";
+import { ProfileView } from "./views/profile";
 
 const Header = () => {
     return <>
@@ -16,12 +17,12 @@ const Content = () => {
     const appState = useContext(AppStateContext);
     return {
         "product": <ProductInstanceView
-            markdown={appState.markdown}
-            expiry={appState.productexpiry}
-            title={appState.productTitle}
+            markdown={appState.manual}
+            expiry={appState.expiry}
+            title={appState.title}
             />,
-        "profile": <p>Hello theres</p>
-    }[appState.view ?? "product"]
+        "profile": <ProfileView />
+    }[appState.view ?? "profile"]
 }
 
 const Footer = () => {
@@ -34,8 +35,7 @@ export const Main = () => {
         <MainMenu />
         <div style={{padding: "10px"}}><Header /></div>
         <Divider />
-        <div style={{ flexGrow: 1, padding: "10px", overflowY: "scroll", overflowX: "hidden" }}><Content /></div>
-        <Divider />
-        <div style={{ padding: "10px" }}><Footer /></div>
+        <div style={{ flexGrow: 1, padding: "15px", overflowY: "scroll", overflowX: "hidden" }}><Content /></div>
+        <div style={{ padding: "10px", boxShadow: "0px 0px 3px grey"}}><Footer /></div>
     </div>
 }
