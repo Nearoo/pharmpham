@@ -10,7 +10,7 @@ export class AppStateProvider extends Component {
             setX: this.setX,
             x: 2,
             setView: this.setView,
-            loadManuel: this.loadManuel,
+            loadManual: this.loadManual,
             loadProduct: this.loadProduct 
         }
     }
@@ -24,7 +24,7 @@ export class AppStateProvider extends Component {
         this.setState({view})
     }
 
-    loadManuel = (id) => {
+    loadManual = (id) => {
         const path = '/md_example.md'
         fetch(path).then(r => r.text()).then(text => this.setState({manual: text}));
     }
