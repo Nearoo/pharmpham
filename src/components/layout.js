@@ -31,5 +31,6 @@ export const Main = () => {
         <Divider />
         <div style={{ padding: "10px" }}><Footer /></div>
         <Button onClick={() =>appState.setX()}>Hello There</Button>
+        <Button onClick={() =>appState.loadProduct(1119)}>Hello There</Button>
     </div>
 }

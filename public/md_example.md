@@ -1,7 +1,7 @@
 
 ## Package leaflet: Information for the user
 
-* Betadine Gargle and Mouthwash 10mg/ml Oral Solution
+* Bond pill instant hero serum
 * Povidone Iodine
 
 Read all of this leaflet carefully because it contains important information for you.
