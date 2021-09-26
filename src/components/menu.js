@@ -49,6 +49,6 @@ export const MainMenu = () => {
     }, [])
 
     return <>
-        <PageHeader ghost={false} extra={<Button onClick={() => setView(0)} >Profile</Button>} title="Drugbuddy" />
+        <PageHeader ghost={false} extra={<Button onClick={() => setView(0)} >Profile</Button>}  title="Drugbuddy" />
     </>
 }

@@ -11,13 +11,14 @@ export const SimpleList = ({ elements = [], ordered }) => {
 }
 
 const KeyVal = ({elements={}, highlightKeys=[]}) => {
-    
     return <Collapse>
-        {Object.entries(elements).map(element =>
-            <Collapse.Panel style={{ backgroundColor: highlightKeys.includes(element[0]) ? "#ffa29c" : ""}} header={element[0]}>
+        {Object.entries(elements).map(element =>{
+            const color = highlightKeys.includes(element[0]) ? "#ffa29c"
+                    : (element[0] === "Oral" ? "orange" : "")
+            return <Collapse.Panel style={{ backgroundColor: color}} header={element[0]}>
                 {highlightKeys.includes(element[0]) ? <Alert message={<ReactMarkdown>{element[1]}</ReactMarkdown>} type="error" /> : <ReactMarkdown>{element[1]}</ReactMarkdown>}
                 
-                </Collapse.Panel>)}
+                </Collapse.Panel>})}
     </Collapse>
 }
 
